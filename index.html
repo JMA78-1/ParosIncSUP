@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Paros e Incidencias</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <div class="header-container">
+      <h1>Registro de Paros e Incidencias</h1>
+    </div>
+  </header>
+
+  <main>
+    <section class="form-section">
+      <h2>Agregar Evento</h2>
+      <form id="event-form">
+        <div class="form-group">
+          <label for="event-number">Paro #:</label>
+          <input type="text" id="event-number" inputmode="numeric" pattern="[0-9]*" required>
+        </div>
+        <div class="form-group">
+          <label for="event-date">Fecha:</label>
+          <input type="date" id="event-date" required>
+        </div>
+        <div class="form-group">
+          <label for="start-time">Inicio:</label>
+          <input type="time" id="start-time" required>
+        </div>
+        <div class="form-group">
+          <label for="end-time">Fin:</label>
+          <input type="time" id="end-time" required>
+        </div>
+        <div class="form-group">
+          <label for="reason">Motivo:</label>
+          <input type="text" id="reason" required>
+        </div>
+        <button type="button" class="primary-btn" onclick="addEvent()">Agregar Evento</button>
+      </form>
+    </section>
+
+    <section class="query-section">
+      <h2>Consulta de Eventos por Fecha</h2>
+      <div class="form-group">
+        <label for="date-query">Fecha de consulta:</label>
+        <input type="date" id="date-query">
+      </div>
+      <button type="button" class="primary-btn" onclick="queryEventsByDate()">Consultar por Día</button>
+    </section>
+
+    <section class="table-section">
+      <h2>Resumen de Paros e Incidencias</h2>
+      <div class="horizontal-table">
+        <table id="event-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Fecha</th>
+              <th>Inicio</th>
+              <th>Fin</th>
+              <th>Duración</th>
+              <th>Motivo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas de eventos se agregarán aquí dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="buttons">
+      <button type="button" class="secondary-btn" onclick="showSaveAsDialog()">Guardar como</button>
+    </div>
+  </footer>
+
+  <div id="confirm-dialog" class="dialog-overlay" style="display: none;">
+    <div class="dialog-box">
+      <p>¿Estás seguro de que deseas eliminar este evento?</p>
+      <div class="dialog-buttons">
+        <button type="button" class="secondary-btn" id="confirm-delete-btn">Eliminar</button>
+        <button type="button" class="primary-btn" onclick="closeConfirmDialog()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="save-as-dialog" class="dialog-overlay" style="display: none;">
+    <div class="dialog-box">
+      <h3>Guardar como</h3>
+      <label for="file-name">Nombre del archivo:</label>
+      <input type="text" id="file-name" placeholder="Nombre del archivo" required>
+      <label for="file-extension">Tipo de archivo:</label>
+      <select id="file-extension">
+        <option value="pdf">PDF</option>
+        <option value="xlsx">Excel (XLSX)</option>
+      </select>
+      <div class="dialog-buttons">
+        <button type="button" class="secondary-btn" onclick="saveAs()">Guardar</button>
+        <button type="button" class="primary-btn" onclick="closeSaveAsDialog()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
